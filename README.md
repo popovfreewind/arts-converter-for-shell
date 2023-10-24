@@ -1,1 +1,1 @@
-brew install imagemagick
+brew install webp
