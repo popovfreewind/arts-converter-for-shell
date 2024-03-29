@@ -1,2 +1,3 @@
 *.zip
 execute
+*.DS_Store
