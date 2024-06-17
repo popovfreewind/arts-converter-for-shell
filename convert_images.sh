@@ -8,7 +8,8 @@ for initialPath in $(find execute -name "*.png" -or -name "*.jpg" -or -name "*.j
     newPath="$dirname/${filename%.*}.webp"
 
     # Convert the image to .webp format with 80% quality
-    cwebp -q 90 $initialPath -o $newPath -m 6
+    cwebp -q 90 -m 6 $initialPath -o $newPath
+    #cwebp -q 30 -alpha_q 0 -m 6 -mt $initialPath -o $newPath
 
     # Print a conversion message
     echo "Converted" $(basename $initialPath) "to" $(basename $newPath)
