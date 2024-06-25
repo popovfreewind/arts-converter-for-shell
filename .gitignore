@@ -1,3 +1,4 @@
 *.zip
 execute
+output
 *.DS_Store
