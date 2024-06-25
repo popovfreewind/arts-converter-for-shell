@@ -14,6 +14,12 @@
             "type": "shell",
             "command": "./resize_images.sh",
             "problemMatcher": []
+        },
+        {
+            "label": "resize_to_size",
+            "type": "shell",
+            "command": "./resize_to_size.sh",
+            "problemMatcher": []
         }
     ]
 }
