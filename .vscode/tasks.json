@@ -8,6 +8,12 @@
             "type": "shell",
             "command": "./convert_images.sh",
             "problemMatcher": []
+        },
+        {
+            "label": "resize_images",
+            "type": "shell",
+            "command": "./resize_images.sh",
+            "problemMatcher": []
         }
     ]
 }
