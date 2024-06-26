@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# Create the output directory if it doesn't exist
+# Script name: convert_images.sh
+
+# Clear the output directory if it exists, then recreate it
+rm -rf output
 mkdir -p output
 
 # Loop through all image files in the 'execute' directory
@@ -9,16 +12,23 @@ find execute \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) -print0 | wh
     filename=$(basename -- "$initialPath")
     filename_no_ext="${filename%.*}"
     
+    # Extract the directory name and create the corresponding output directory
+    dirname=$(dirname -- "$initialPath")
+    relative_dirname=${dirname#execute/}
+    output_dir="output/$relative_dirname"
+    mkdir -p "$output_dir"
+    
     # Create a new path in the output directory with the .png extension
-    newPath="output/${filename_no_ext}.png"
+    newPath="$output_dir/${filename_no_ext}.png"
 
-    # Resize the image to 650x650 pixels using ImageMagick
-    magick "$initialPath" -resize 650x650\! "$newPath"
+    # Resize the image to fit within a 650x650 pixel canvas, add a white background,
+    # convert to grayscale, and then threshold to black and white using ImageMagick
+    magick "$initialPath" -resize 650x650 -background white -gravity center -extent 650x650 -colorspace Gray -threshold 50% "$newPath"
 
     # Print a conversion message
     echo "Converted" "$(basename "$initialPath")" "to" "$(basename "$newPath")"
 
-    # Delete the original file if needed
+    # Delete the original file if needed (commented out by default)
     # rm "$initialPath"
 
 done
