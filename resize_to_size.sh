@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Script name: convert_images.sh
-
 # Clear the output directory if it exists, then recreate it
 rm -rf output
 mkdir -p output
