@@ -21,7 +21,8 @@ find execute \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) -print0 | wh
 
     # Resize the image to fit within a 650x650 pixel canvas, add a white background,
     # convert to grayscale, and then threshold to black and white using ImageMagick
-    magick "$initialPath" -resize 650x650 -background white -gravity center -extent 650x650 -threshold 60% -monochrome "$newPath"
+    #magick "$initialPath" -resize 650x650 -background white -gravity center -extent 650x650 -threshold 60% -monochrome "$newPath"
+    magick "$initialPath" -resize 1920x1080 -gravity center -extent 1920x1080 "$newPath"
 
     # Print a conversion message
     echo "Converted" "$(basename "$initialPath")" "to" "$(basename "$newPath")"
