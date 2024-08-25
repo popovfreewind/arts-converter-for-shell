@@ -20,6 +20,12 @@
             "type": "shell",
             "command": "./resize_to_size.sh",
             "problemMatcher": []
+        },
+        {
+            "label": "prepare_images",
+            "type": "shell",
+            "command": "./prepare_images.sh",
+            "problemMatcher": []
         }
     ]
 }
