@@ -7,7 +7,7 @@ mkdir -p app/images/categories
 mkdir -p app/images/categories_icons
 
 # Loop through all image files in the 'execute' directory
-find execute \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) -print0 | while IFS= read -r -d $'\0' initialPath; do
+find execute \( -name "*.png" -o -name "*.jpg" -o -name "*.JPG" -o -name "*.webp" -o -name "*.jpeg" \) -print0 | while IFS= read -r -d $'\0' initialPath; do
     # Extract the file name without the extension
     filename=$(basename -- "$initialPath")
     filename_no_ext="${filename%.*}"
@@ -25,8 +25,9 @@ find execute \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) -print0 | wh
     newPathIcon="$output_dir_icons/${filename_no_ext}.png"
 
     # convert to grayscale, and then threshold to black and white using ImageMagick
-    magick "$initialPath" -resize 650x650 -background white -gravity center -extent 650x650 -threshold 60% -monochrome "$newPath"
-    magick "$initialPath" -resize 70x70 -background white -gravity center -extent 70x70 "$newPathIcon"
+    #magick "$initialPath" -resize 650x650 -background white -gravity center -extent 650x650 -threshold 60% -monochrome "$newPath"
+    magick "$initialPath" -resize 650x650 -background white -gravity center -extent 650x650 "$newPath"
+    #magick "$initialPath" -resize 70x70 -background white -gravity center -extent 70x70 "$newPathIcon"
 
     # Print a conversion message
     echo "Converted" "$(basename "$initialPath")" "to" "$(basename "$newPath")"
