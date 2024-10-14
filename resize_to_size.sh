@@ -17,7 +17,7 @@ find execute \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) -print0 | wh
     mkdir -p "$output_dir"
     
     # Create a new path in the output directory with the .png extension
-    newPath="$output_dir/${filename_no_ext}.png"
+    newPath="$output_dir/${filename_no_ext}.jpg"
 
     # Resize the image to fit within a 650x650 pixel canvas, add a white background,
     # convert to grayscale, and then threshold to black and white using ImageMagick
