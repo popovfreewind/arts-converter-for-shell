@@ -26,6 +26,12 @@
             "type": "shell",
             "command": "./prepare_images.sh",
             "problemMatcher": []
+        },
+        {
+            "label": "prepare_channel_icons",
+            "type": "shell",
+            "command": "./prepare_channel_icons.sh",
+            "problemMatcher": []
         }
     ]
 }

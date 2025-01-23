@@ -9,24 +9,27 @@ find execute \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.web
     # Extract the file name without the extension
     filename=$(basename -- "$initialPath")
     filename_no_ext="${filename%.*}"
-    
+
     # Extract the directory name and create the corresponding output directory
     dirname=$(dirname -- "$initialPath")
     relative_dirname=${dirname#execute/}
     output_dir="output/$relative_dirname"
     mkdir -p "$output_dir"
-    
+
     # Create a new path in the output directory with the .png extension
-    newPath="$output_dir/${filename_no_ext}.jpg"
+    fhd="$output_dir/${filename_no_ext}_fhd.png"
+    hd="$output_dir/${filename_no_ext}_hd.png"
+    sd="$output_dir/${filename_no_ext}_sd.png"
 
-    # Resize the image to fit within a 650x650 pixel canvas, add a white background,
-    # convert to grayscale, and then threshold to black and white using ImageMagick
-    #magick "$initialPath" -resize 650x650 -background white -gravity center -extent 650x650 -threshold 60% -monochrome "$newPath"
-    magick "$initialPath" -resize 1920x1080 -gravity center -extent 1920x1080 "$newPath"
-     #magick "$initialPath" -resize 250x250 -gravity center -extent 250x250 "$newPath"
+    # Resize the image to squeeze into the exact dimensions without cropping
+    magick "$initialPath" -resize 540x405\! "$fhd"
+    echo "Converted" "$(basename "$initialPath")" "to" "$(basename "$fhd")"
 
-    # Print a conversion message
-    echo "Converted" "$(basename "$initialPath")" "to" "$(basename "$newPath")"
+    magick "$initialPath" -resize 290x218\! "$hd"
+    echo "Converted" "$(basename "$initialPath")" "to" "$(basename "$hd")"
+
+    magick "$initialPath" -resize 246x140\! "$sd"
+    echo "Converted" "$(basename "$initialPath")" "to" "$(basename "$sd")"
 
     # Delete the original file if needed (commented out by default)
     # rm "$initialPath"
